@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/miaolz123/samaritan/api"
-	"github.com/miaolz123/samaritan/constant"
-	"github.com/miaolz123/samaritan/model"
+	"github.com/marstau/samaritan/api"
+	"github.com/marstau/samaritan/constant"
+	"github.com/marstau/samaritan/model"
 	"github.com/robertkrimen/otto"
 )
 

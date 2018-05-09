@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/bitly/go-simplejson"
-	"github.com/miaolz123/samaritan/constant"
+	"github.com/marstau/samaritan/constant"
 )
 
 var sosobtcSymbolMap = map[string]map[string]string{

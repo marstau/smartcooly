@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/bitly/go-simplejson"
-	"github.com/miaolz123/conver"
-	"github.com/miaolz123/samaritan/constant"
-	"github.com/miaolz123/samaritan/model"
+	"github.com/marstau/conver"
+	"github.com/marstau/samaritan/constant"
+	"github.com/marstau/samaritan/model"
 )
 
 func init() {

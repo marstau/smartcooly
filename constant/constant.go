@@ -15,7 +15,7 @@ const (
 // exchange types
 const (
 	OkCoinCn     = "okcoin.cn"
-	Huobi        = "huobi"
+	Huobi        = "huobipro"
 	Poloniex     = "poloniex"
 	Btcc         = "btcc"
 	Chbtc        = "chbtc"

@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/miaolz123/conver"
-	"github.com/miaolz123/samaritan/constant"
+	"github.com/marstau/conver"
+	"github.com/marstau/samaritan/constant"
 	"github.com/robertkrimen/otto"
 )
 

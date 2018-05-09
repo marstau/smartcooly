@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/miaolz123/samaritan/constant"
+	"github.com/marstau/samaritan/constant"
 )
 
 // Log struct

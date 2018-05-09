@@ -1,6 +1,6 @@
 # Samaritan
 
-[![Travis](https://img.shields.io/travis/miaolz123/samaritan.svg)](https://travis-ci.org/miaolz123/samaritan) [![Go Report Card](https://goreportcard.com/badge/github.com/miaolz123/samaritan)](https://goreportcard.com/report/github.com/miaolz123/samaritan) [![Github All Releases](https://img.shields.io/github/downloads/miaolz123/samaritan/total.svg)](https://github.com/miaolz123/samaritan/releases) [![Gitter](https://img.shields.io/gitter/room/miaolz123/samaritan.svg)](https://gitter.im/miaolz123-samaritan/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Docker Pulls](https://img.shields.io/docker/pulls/miaolz123/samaritan.svg)](https://hub.docker.com/r/miaolz123/samaritan/) [![license](https://img.shields.io/github/license/miaolz123/samaritan.svg)](https://github.com/miaolz123/samaritan/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/miaolz123/samaritan.svg)](https://travis-ci.org/miaolz123/samaritan) [![Go Report Card](https://goreportcard.com/badge/github.com/marstau/samaritan)](https://goreportcard.com/report/github.com/marstau/samaritan) [![Github All Releases](https://img.shields.io/github/downloads/miaolz123/samaritan/total.svg)](https://github.com/marstau/samaritan/releases) [![Gitter](https://img.shields.io/gitter/room/miaolz123/samaritan.svg)](https://gitter.im/miaolz123-samaritan/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Docker Pulls](https://img.shields.io/docker/pulls/miaolz123/samaritan.svg)](https://hub.docker.com/r/miaolz123/samaritan/) [![license](https://img.shields.io/github/license/miaolz123/samaritan.svg)](https://github.com/marstau/samaritan/blob/master/LICENSE)
 
 [中文文档](http://samaritan.stockdb.org/#/zh-cn)
 
@@ -12,7 +12,7 @@ The default username and password are `admin`, please modify them immediately af
 
 ### From installation package
 
-1. Download the samaritan installation package on [this page](https://github.com/miaolz123/samaritan/releases)
+1. Download the samaritan installation package on [this page](https://github.com/marstau/samaritan/releases)
 2. Unzip the samaritan installation package
 3. Enter the extracted samaritan installation directory
 4. Run `samaritan`
@@ -22,7 +22,7 @@ Then, samaritan is running at `http://localhost:9876`.
 **Linux & Mac user quick start command**
 
 ```shell
-wget https://github.com/miaolz123/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
+wget https://github.com/marstau/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
 tar -xzvf samaritan_{{OS}}_{{ARCH}}.tar.gz
 cd samaritan_{{OS}}_{{ARCH}}
 ./samaritan
@@ -78,7 +78,7 @@ Then, samaritan is running at `http://localhost:19876`.
 
 Contributions are not accepted in principle until the basic infrastructure is complete.
 
-However, the [ISSUE](https://github.com/miaolz123/samaritan/issues) is welcome.
+However, the [ISSUE](https://github.com/marstau/samaritan/issues) is welcome.
 
 ## License
 

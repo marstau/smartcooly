@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/miaolz123/samaritan/handler"
+	"github.com/marstau/samaritan/handler"
 )
 
 func main() {

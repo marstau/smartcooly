@@ -7,7 +7,7 @@ RUN apk add --no-cache --virtual .build-deps wget gnupg tar ca-certificates && \
     wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
     wget -q https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.23-r3/glibc-2.23-r3.apk && \
     apk add glibc-2.23-r3.apk && \
-    wget -q https://github.com/miaolz123/samaritan/releases/download/v${SAMARITAN_VERSION}/samaritan_linux_amd64.tar.gz && \
+    wget -q https://github.com/marstau/samaritan/releases/download/v${SAMARITAN_VERSION}/samaritan_linux_amd64.tar.gz && \
     tar -C /usr/src -xzf samaritan_linux_amd64.tar.gz && \
     echo $'#!/bin/sh\n\
 nohup /docker-entrypoint.sh postgres >/dev/null 2>&1 &\n\

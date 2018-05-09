@@ -8,7 +8,7 @@
 
 ### 通过安装包
 
-1. 在[这个页面](https://github.com/miaolz123/samaritan/releases)下载 samaritan 安装包
+1. 在[这个页面](https://github.com/marstau/samaritan/releases)下载 samaritan 安装包
 2. 解压 samaritan 安装包
 3. 进入 samaritan 安装目录
 4. 运行 `samaritan`
@@ -18,7 +18,7 @@
 **Linux & Mac 用户快速上手命令**
 
 ```shell
-wget https://github.com/miaolz123/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
+wget https://github.com/marstau/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
 tar -xzvf samaritan_{{OS}}_{{ARCH}}.tar.gz
 cd samaritan_{{OS}}_{{ARCH}}
 ./samaritan

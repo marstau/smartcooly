@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/miaolz123/samaritan/constant"
+	"github.com/marstau/samaritan/constant"
 )
 
 // Trader struct

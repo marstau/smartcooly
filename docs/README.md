@@ -8,7 +8,7 @@ The default username and password are `admin`, please modify them immediately af
 
 ### From installation package
 
-1. Download the samaritan installation package on [this page](https://github.com/miaolz123/samaritan/releases)
+1. Download the samaritan installation package on [this page](https://github.com/marstau/samaritan/releases)
 2. Unzip the samaritan installation package
 3. Enter the extracted samaritan installation directory
 4. Run `samaritan`
@@ -18,7 +18,7 @@ Then, samaritan is running at `http://localhost:9876`.
 **Linux & Mac user quick start command**
 
 ```shell
-wget https://github.com/miaolz123/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
+wget https://github.com/marstau/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
 tar -xzvf samaritan_{{OS}}_{{ARCH}}.tar.gz
 cd samaritan_{{OS}}_{{ARCH}}
 ./samaritan
