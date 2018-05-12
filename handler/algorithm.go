@@ -89,7 +89,7 @@ func (algorithm) Delete(ids []int64, ctx rpc.Context) (resp response) {
 		return
 	}
 	userIds := []int64{}
-	_, users, err := self.ListUser(-1, 1, "id")
+	_, users, err := self.ListUser(5, 1, "id")
 	if err != nil {
 		resp.Message = fmt.Sprint(err)
 		return

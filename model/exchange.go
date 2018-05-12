@@ -19,7 +19,7 @@ type Exchange struct {
 
 // ListExchange ...
 func (user User) ListExchange(size, page int64, order string) (total int64, exchanges []Exchange, err error) {
-	_, users, err := user.ListUser(-1, 1, "id")
+	_, users, err := user.ListUser(5, 1, "id")
 	if err != nil {
 		return
 	}

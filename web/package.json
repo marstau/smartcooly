@@ -6,7 +6,7 @@
   "keywords": [],
   "scripts": {
     "dev": "cooking watch",
-    "dist": "cooking build"
+    "dist": "cooking build -- -p"
   },
   "license": "MIT",
   "dependencies": {
