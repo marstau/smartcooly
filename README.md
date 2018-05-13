@@ -70,6 +70,13 @@ Then, samaritan is running at `http://localhost:19876`.
 
 ![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/run-trader.png)
 
+## Commands
+
+```
+go build samaritan.go
+npm run dist
+```
+
 ## Algorithm Reference
 
 [Read Documentation](http://samaritan.stockdb.org/#/#algorithm-reference)
