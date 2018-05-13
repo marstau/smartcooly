@@ -87,7 +87,12 @@ func (e *HuobiPro) GetType() string {
 // GetName get the name of this exchange
 func (e *HuobiPro) GetName() string {
 	// return e.api.Name
-	return ""
+	name, err := e.api.GetAccountId()
+	if err != nil {
+		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetName() error, ", err)
+		return ""
+	}
+	return name
 }
 
 // SetLimit set the limit calls amount per second of this exchange
@@ -145,9 +150,7 @@ func (e *HuobiPro) GetAccount() interface{} {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetAccount() error, ", err)
 		return nil
 	}
-	e.logger.Log(constant.INFO, "", 0.0, 0.0, "accountid, ", accountid)
 	
-
 	// return map[string]float64{
 	// 	"CNY":       conver.Float64Must(json.Get("available_cny_display").Interface()),
 	// 	"FrozenCNY": conver.Float64Must(json.Get("frozen_cny_display").Interface()),
@@ -156,7 +159,7 @@ func (e *HuobiPro) GetAccount() interface{} {
 	// 	"LTC":       conver.Float64Must(json.Get("available_ltc_display").Interface()),
 	// 	"FrozenLTC": conver.Float64Must(json.Get("frozen_ltc_display").Interface()),
 	// }
-	return nil
+	return accountid
 }
 
 
