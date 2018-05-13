@@ -7,6 +7,7 @@ import (
 
 	"github.com/bitly/go-simplejson"
 	"net/http"
+	"github.com/nntaoli-project/GoEx"
 	"github.com/nntaoli-project/GoEx/huobi"
 	"github.com/marstau/conver"
 	"github.com/marstau/samaritan/constant"
@@ -366,56 +367,56 @@ func (e *HuobiPro) CancelOrder(order Order) bool {
 	return false
 }
 
-// getTicker get market ticker & depth
-func (e *HuobiPro) getTicker(stockType string, sizes ...interface{}) (ticker Ticker, err error) {
-	stockType = strings.ToUpper(stockType)
-	if _, ok := e.stockTypeMap[stockType]; !ok {
-		err = fmt.Errorf("GetTicker() error, unrecognized stockType: %+v", stockType)
-		return
-	}
-	size := 20
-	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
-		size = conver.IntMust(sizes[0])
-	}
-	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
-	if err != nil {
-		err = fmt.Errorf("GetTicker() error, %+v", err)
-		return
-	}
-	json, err := simplejson.NewJson(resp)
-	if err != nil {
-		err = fmt.Errorf("GetTicker() error, %+v", err)
-		return
-	}
-	depthsJSON := json.Get("bids")
-	for i := 0; i < len(depthsJSON.MustArray()); i++ {
-		depthJSON := depthsJSON.GetIndex(i)
-		ticker.Bids = append(ticker.Bids, OrderBook{
-			Price:  depthJSON.GetIndex(0).MustFloat64(),
-			Amount: depthJSON.GetIndex(1).MustFloat64(),
-		})
-	}
-	depthsJSON = json.Get("asks")
-	for i := 0; i < len(depthsJSON.MustArray()); i++ {
-		depthJSON := depthsJSON.GetIndex(i)
-		ticker.Asks = append(ticker.Asks, OrderBook{
-			Price:  depthJSON.GetIndex(0).MustFloat64(),
-			Amount: depthJSON.GetIndex(1).MustFloat64(),
-		})
-	}
-	if len(ticker.Bids) < 1 || len(ticker.Asks) < 1 {
-		err = fmt.Errorf("GetTicker() error, can not get enough Bids or Asks")
-		return
-	}
-	ticker.Buy = ticker.Bids[0].Price
-	ticker.Sell = ticker.Asks[0].Price
-	ticker.Mid = (ticker.Buy + ticker.Sell) / 2
-	return
-}
+// // getTicker get market ticker & depth
+// func (e *HuobiPro) getTicker(stockType string, sizes ...interface{}) (ticker Ticker, err error) {
+// 	stockType = strings.ToUpper(stockType)
+// 	if _, ok := e.stockTypeMap[stockType]; !ok {
+// 		err = fmt.Errorf("GetTicker() error, unrecognized stockType: %+v", stockType)
+// 		return
+// 	}
+// 	size := 20
+// 	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
+// 		size = conver.IntMust(sizes[0])
+// 	}
+// 	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
+// 	if err != nil {
+// 		err = fmt.Errorf("GetTicker() error, %+v", err)
+// 		return
+// 	}
+// 	json, err := simplejson.NewJson(resp)
+// 	if err != nil {
+// 		err = fmt.Errorf("GetTicker() error, %+v", err)
+// 		return
+// 	}
+// 	depthsJSON := json.Get("bids")
+// 	for i := 0; i < len(depthsJSON.MustArray()); i++ {
+// 		depthJSON := depthsJSON.GetIndex(i)
+// 		ticker.Bids = append(ticker.Bids, OrderBook{
+// 			Price:  depthJSON.GetIndex(0).MustFloat64(),
+// 			Amount: depthJSON.GetIndex(1).MustFloat64(),
+// 		})
+// 	}
+// 	depthsJSON = json.Get("asks")
+// 	for i := 0; i < len(depthsJSON.MustArray()); i++ {
+// 		depthJSON := depthsJSON.GetIndex(i)
+// 		ticker.Asks = append(ticker.Asks, OrderBook{
+// 			Price:  depthJSON.GetIndex(0).MustFloat64(),
+// 			Amount: depthJSON.GetIndex(1).MustFloat64(),
+// 		})
+// 	}
+// 	if len(ticker.Bids) < 1 || len(ticker.Asks) < 1 {
+// 		err = fmt.Errorf("GetTicker() error, can not get enough Bids or Asks")
+// 		return
+// 	}
+// 	ticker.Buy = ticker.Bids[0].Price
+// 	ticker.Sell = ticker.Asks[0].Price
+// 	ticker.Mid = (ticker.Buy + ticker.Sell) / 2
+// 	return
+// }
 
 // GetTicker get market ticker & depth
 func (e *HuobiPro) GetTicker(stockType string, sizes ...interface{}) interface{} {
-	ticker, err := e.getTicker(stockType, sizes...)
+	ticker, err := e.api.GetTicker(goex.BTC_USDT)
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, err)
 		return false
