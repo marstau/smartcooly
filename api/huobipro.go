@@ -6,13 +6,14 @@ import (
 	"strings"
 	"time"
 
+	"github.com/nntaoli-project/GoEx"
 	"github.com/bitly/go-simplejson"
 	"github.com/marstau/conver"
 	"github.com/marstau/samaritan/constant"
 	"github.com/marstau/samaritan/model"
 )
 
-// HuobiPro the exchange struct of huobi.com
+// HuobiPro the exchange struct of huobipro.com
 type HuobiPro struct {
 	stockTypeMap     map[string]string
 	tradeTypeMap     map[int]string
@@ -361,7 +362,7 @@ func (e *HuobiPro) getTicker(stockType string, sizes ...interface{}) (ticker Tic
 	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
 		size = conver.IntMust(sizes[0])
 	}
-	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
+	resp, err := get(fmt.Sprintf("http://api.huobipro.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
 	if err != nil {
 		err = fmt.Errorf("GetTicker() error, %+v", err)
 		return
@@ -422,7 +423,7 @@ func (e *HuobiPro) GetRecords(stockType, period string, sizes ...interface{}) in
 	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
 		size = conver.IntMust(sizes[0])
 	}
-	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/%v_kline_%v_json.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), e.recordsPeriodMap[period]))
+	resp, err := get(fmt.Sprintf("http://api.huobipro.com/staticmarket/%v_kline_%v_json.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), e.recordsPeriodMap[period]))
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetRecords() error, ", err)
 		return false

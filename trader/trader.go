@@ -17,6 +17,7 @@ var (
 	exchangeMaker = map[string]func(api.Option) api.Exchange{
 		constant.OkCoinCn:     api.NewOKCoinCn,
 		constant.Huobi:        api.NewHuobi,
+		constant.HuobiPro:     api.NewHuobiPro,
 		constant.Poloniex:     api.NewPoloniex,
 		constant.Btcc:         api.NewBtcc,
 		constant.Chbtc:        api.NewChbtc,
