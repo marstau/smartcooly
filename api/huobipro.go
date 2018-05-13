@@ -2,12 +2,12 @@ package api
 
 import (
 	"fmt"
-	"sort"
 	"strings"
 	"time"
 
-	"github.com/nntaoli-project/GoEx"
 	"github.com/bitly/go-simplejson"
+	"net/http"
+	"github.com/nntaoli-project/GoEx/huobi"
 	"github.com/marstau/conver"
 	"github.com/marstau/samaritan/constant"
 	"github.com/marstau/samaritan/model"
@@ -22,25 +22,21 @@ type HuobiPro struct {
 	records          map[string][]Record
 	host             string
 	logger           model.Logger
-	option           Option
+	api              *huobi.HuobiPro
 
 	limit     float64
 	lastSleep int64
 	lastTimes int64
 }
 
-
-type HuoBi_V2 struct {
-	httpClient *http.Client
-	accountId,
-	baseUrl,
-	accessKey,
-	secretKey string
-}
-
-
 // NewHuobiPro create an exchange struct of huobipro.com
 func NewHuobiPro(opt Option) Exchange {
+	hbpro := huobi.NewHuobiPro(http.DefaultClient, opt.AccessKey, opt.SecretKey, "")
+	// if err != nil {
+	// 	fmt.Println("get ticker failed:", err.Error())
+	// 	return
+	// }
+
 	return &HuobiPro{
 		stockTypeMap: map[string]string{
 			"BTC/CNY": "1",
@@ -66,9 +62,8 @@ func NewHuobiPro(opt Option) Exchange {
 			"LTC/CNY": 0.01,
 		},
 		records: make(map[string][]Record),
-		host:    "https://api.huobipro.com",
 		logger:  model.Logger{TraderID: opt.TraderID, ExchangeType: opt.Type},
-		option:  opt,
+		api:  hbpro,
 
 		limit:     10.0,
 		lastSleep: time.Now().UnixNano(),
@@ -85,12 +80,14 @@ func (e *HuobiPro) Log(msgs ...interface{}) {
 
 // GetType get the type of this exchange
 func (e *HuobiPro) GetType() string {
-	return e.option.Type
+	// return e.api.Type
+	return ""
 }
 
 // GetName get the name of this exchange
 func (e *HuobiPro) GetName() string {
-	return e.option.Name
+	// return e.api.Name
+	return ""
 }
 
 // SetLimit set the limit calls amount per second of this exchange
@@ -115,239 +112,254 @@ func (e *HuobiPro) GetMinAmount(stock string) float64 {
 	return e.minAmountMap[stock]
 }
 
-func (e *HuobiPro) getAuthJSON(url string, params []string, optionals ...string) (json *simplejson.Json, err error) {
-	e.lastTimes++
-	params = append(params, []string{
-		"access_key=" + e.option.AccessKey,
-		"secret_key=" + e.option.SecretKey,
-		fmt.Sprint("created=", time.Now().Unix()),
-	}...)
-	sort.Strings(params)
-	params = append(params, "sign="+signMd5(params))
-	resp, err := post(url, append(params, optionals...))
-	if err != nil {
-		return
-	}
-	return simplejson.NewJson(resp)
-}
+// func (e *HuobiPro) getAuthJSON(url string, params []string, optionals ...string) (json *simplejson.Json, err error) {
+// 	e.lastTimes++
+// 	params = append(params, []string{
+// 		"access_key=" + e.api.AccessKey,
+// 		"secret_key=" + e.api.SecretKey,
+// 		fmt.Sprint("created=", time.Now().Unix()),
+// 	}...)
+// 	sort.Strings(params)
+// 	params = append(params, "sign="+signMd5(params))
+// 	resp, err := post(url, append(params, optionals...))
+// 	if err != nil {
+// 		return
+// 	}
+// 	return simplejson.NewJson(resp)
+// }
 
 // GetAccount get the account detail of this exchange
 func (e *HuobiPro) GetAccount() interface{} {
-	params := []string{
-		"method=get_account_info",
-	}
-	json, err := e.getAuthJSON(e.host, params, "market=cny")
+	// params := []string{
+	// 	"method=get_account_info",
+	// }
+
+	// json, err := e.getAuthJSON(e.host, params, "market=cny")
+	// if err != nil {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetAccount() error, ", err)
+	// 	return false
+	// }
+
+	accountid, err := e.api.GetAccountId()
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetAccount() error, ", err)
-		return false
+		return nil
 	}
-	if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetAccount() error, ", strings.TrimSpace(json.Get("msg").MustString()))
-		return false
-	}
-	return map[string]float64{
-		"CNY":       conver.Float64Must(json.Get("available_cny_display").Interface()),
-		"FrozenCNY": conver.Float64Must(json.Get("frozen_cny_display").Interface()),
-		"BTC":       conver.Float64Must(json.Get("available_btc_display").Interface()),
-		"FrozenBTC": conver.Float64Must(json.Get("frozen_btc_display").Interface()),
-		"LTC":       conver.Float64Must(json.Get("available_ltc_display").Interface()),
-		"FrozenLTC": conver.Float64Must(json.Get("frozen_ltc_display").Interface()),
-	}
+	e.logger.Log(constant.INFO, "", 0.0, 0.0, "accountid, ", accountid)
+	
+
+	// return map[string]float64{
+	// 	"CNY":       conver.Float64Must(json.Get("available_cny_display").Interface()),
+	// 	"FrozenCNY": conver.Float64Must(json.Get("frozen_cny_display").Interface()),
+	// 	"BTC":       conver.Float64Must(json.Get("available_btc_display").Interface()),
+	// 	"FrozenBTC": conver.Float64Must(json.Get("frozen_btc_display").Interface()),
+	// 	"LTC":       conver.Float64Must(json.Get("available_ltc_display").Interface()),
+	// 	"FrozenLTC": conver.Float64Must(json.Get("frozen_ltc_display").Interface()),
+	// }
+	return nil
 }
+
 
 // Trade place an order
 func (e *HuobiPro) Trade(tradeType string, stockType string, _price, _amount interface{}, msgs ...interface{}) interface{} {
-	stockType = strings.ToUpper(stockType)
-	tradeType = strings.ToUpper(tradeType)
-	price := conver.Float64Must(_price)
-	amount := conver.Float64Must(_amount)
-	if _, ok := e.stockTypeMap[stockType]; !ok {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Trade() error, unrecognized stockType: ", stockType)
-		return false
-	}
-	switch tradeType {
-	case constant.TradeTypeBuy:
-		return e.buy(stockType, price, amount, msgs...)
-	case constant.TradeTypeSell:
-		return e.sell(stockType, price, amount, msgs...)
-	default:
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Trade() error, unrecognized tradeType: ", tradeType)
-		return false
-	}
+	// stockType = strings.ToUpper(stockType)
+	// tradeType = strings.ToUpper(tradeType)
+	// price := conver.Float64Must(_price)
+	// amount := conver.Float64Must(_amount)
+	// if _, ok := e.stockTypeMap[stockType]; !ok {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Trade() error, unrecognized stockType: ", stockType)
+	// 	return false
+	// }
+	// switch tradeType {
+	// case constant.TradeTypeBuy:
+	// 	return e.buy(stockType, price, amount, msgs...)
+	// case constant.TradeTypeSell:
+	// 	return e.sell(stockType, price, amount, msgs...)
+	// default:
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Trade() error, unrecognized tradeType: ", tradeType)
+	// 	return false
+	// }
+	return nil
 }
 
 func (e *HuobiPro) buy(stockType string, price, amount float64, msgs ...interface{}) interface{} {
-	params := []string{
-		"coin_type=" + e.stockTypeMap[stockType],
-		fmt.Sprintf("amount=%v", amount),
-	}
-	methodParam := "method=buy_market"
-	if price > 0 {
-		methodParam = "method=buy"
-		params = append(params, fmt.Sprintf("price=%v", price))
-	}
-	params = append(params, methodParam)
-	json, err := e.getAuthJSON(e.host, params, "market=cny")
-	if err != nil {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Buy() error, ", err)
-		return false
-	}
-	if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Buy() error, ", strings.TrimSpace(json.Get("msg").MustString()))
-		return false
-	}
-	e.logger.Log(constant.BUY, stockType, price, amount, msgs...)
-	return fmt.Sprint(json.Get("id").Interface())
+	// params := []string{
+	// 	"coin_type=" + e.stockTypeMap[stockType],
+	// 	fmt.Sprintf("amount=%v", amount),
+	// }
+	// methodParam := "method=buy_market"
+	// if price > 0 {
+	// 	methodParam = "method=buy"
+	// 	params = append(params, fmt.Sprintf("price=%v", price))
+	// }
+	// params = append(params, methodParam)
+	// json, err := e.getAuthJSON(e.host, params, "market=cny")
+	// if err != nil {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Buy() error, ", err)
+	// 	return false
+	// }
+	// if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Buy() error, ", strings.TrimSpace(json.Get("msg").MustString()))
+	// 	return false
+	// }
+	// e.logger.Log(constant.BUY, stockType, price, amount, msgs...)
+	// return fmt.Sprint(json.Get("id").Interface())
+	return nil
 }
 
 func (e *HuobiPro) sell(stockType string, price, amount float64, msgs ...interface{}) interface{} {
-	params := []string{
-		"coin_type=" + e.stockTypeMap[stockType],
-		fmt.Sprintf("amount=%v", amount),
-	}
-	methodParam := "method=sell_market"
-	if price > 0 {
-		methodParam = "method=sell"
-		params = append(params, fmt.Sprintf("price=%v", price))
-	}
-	params = append(params, methodParam)
-	json, err := e.getAuthJSON(e.host, params, "market=cny")
-	if err != nil {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Sell() error, ", err)
-		return false
-	}
-	if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Sell() error, ", strings.TrimSpace(json.Get("msg").MustString()))
-		return false
-	}
-	e.logger.Log(constant.SELL, stockType, price, amount, msgs...)
-	return fmt.Sprint(json.Get("id").Interface())
+	// params := []string{
+	// 	"coin_type=" + e.stockTypeMap[stockType],
+	// 	fmt.Sprintf("amount=%v", amount),
+	// }
+	// methodParam := "method=sell_market"
+	// if price > 0 {
+	// 	methodParam = "method=sell"
+	// 	params = append(params, fmt.Sprintf("price=%v", price))
+	// }
+	// params = append(params, methodParam)
+	// json, err := e.getAuthJSON(e.host, params, "market=cny")
+	// if err != nil {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Sell() error, ", err)
+	// 	return false
+	// }
+	// if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "Sell() error, ", strings.TrimSpace(json.Get("msg").MustString()))
+	// 	return false
+	// }
+	// e.logger.Log(constant.SELL, stockType, price, amount, msgs...)
+	// return fmt.Sprint(json.Get("id").Interface())
+	return nil
 }
 
 // GetOrder get details of an order
 func (e *HuobiPro) GetOrder(stockType, id string) interface{} {
-	stockType = strings.ToUpper(stockType)
-	if _, ok := e.stockTypeMap[stockType]; !ok {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrder() error, unrecognized stockType: ", stockType)
-		return false
-	}
-	params := []string{
-		"method=order_info",
-		"coin_type=" + e.stockTypeMap[stockType],
-		"id=" + id,
-	}
-	json, err := e.getAuthJSON(e.host, params, "market=cny")
-	if err != nil {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrder() error, ", err)
-		return false
-	}
-	if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrder() error, ", strings.TrimSpace(json.Get("msg").MustString()))
-		return false
-	}
-	return Order{
-		ID:         fmt.Sprint(json.Get("id").Interface()),
-		Price:      conver.Float64Must(json.Get("order_price").Interface()),
-		Amount:     conver.Float64Must(json.Get("order_amount").Interface()),
-		DealAmount: conver.Float64Must(json.Get("processed_amount").Interface()),
-		TradeType:  e.tradeTypeMap[json.Get("type").MustInt()],
-		StockType:  stockType,
-	}
+	// stockType = strings.ToUpper(stockType)
+	// if _, ok := e.stockTypeMap[stockType]; !ok {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrder() error, unrecognized stockType: ", stockType)
+	// 	return false
+	// }
+	// params := []string{
+	// 	"method=order_info",
+	// 	"coin_type=" + e.stockTypeMap[stockType],
+	// 	"id=" + id,
+	// }
+	// json, err := e.getAuthJSON(e.host, params, "market=cny")
+	// if err != nil {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrder() error, ", err)
+	// 	return false
+	// }
+	// if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrder() error, ", strings.TrimSpace(json.Get("msg").MustString()))
+	// 	return false
+	// }
+	// return Order{
+	// 	ID:         fmt.Sprint(json.Get("id").Interface()),
+	// 	Price:      conver.Float64Must(json.Get("order_price").Interface()),
+	// 	Amount:     conver.Float64Must(json.Get("order_amount").Interface()),
+	// 	DealAmount: conver.Float64Must(json.Get("processed_amount").Interface()),
+	// 	TradeType:  e.tradeTypeMap[json.Get("type").MustInt()],
+	// 	StockType:  stockType,
+	// }
+	return nil
 }
 
 // GetOrders get all unfilled orders
 func (e *HuobiPro) GetOrders(stockType string) interface{} {
-	stockType = strings.ToUpper(stockType)
-	orders := []Order{}
-	if _, ok := e.stockTypeMap[stockType]; !ok {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrders() error, unrecognized stockType: ", stockType)
-		return false
-	}
-	params := []string{
-		"method=get_orders",
-		"coin_type=" + e.stockTypeMap[stockType],
-	}
-	json, err := e.getAuthJSON(e.host+"order_info.do", params)
-	if err != nil {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrders() error, ", err)
-		return false
-	}
-	if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrders() error, ", strings.TrimSpace(json.Get("msg").MustString()))
-		return false
-	}
-	count := len(json.MustArray())
-	for i := 0; i < count; i++ {
-		orderJSON := json.GetIndex(i)
-		orders = append(orders, Order{
-			ID:         fmt.Sprint(orderJSON.Get("id").Interface()),
-			Price:      conver.Float64Must(orderJSON.Get("order_price").Interface()),
-			Amount:     conver.Float64Must(orderJSON.Get("order_amount").Interface()),
-			DealAmount: conver.Float64Must(orderJSON.Get("processed_amount").Interface()),
-			TradeType:  e.tradeTypeMap[orderJSON.Get("type").MustInt()],
-			StockType:  stockType,
-		})
-	}
-	return orders
+	// stockType = strings.ToUpper(stockType)
+	// orders := []Order{}
+	// if _, ok := e.stockTypeMap[stockType]; !ok {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrders() error, unrecognized stockType: ", stockType)
+	// 	return false
+	// }
+	// params := []string{
+	// 	"method=get_orders",
+	// 	"coin_type=" + e.stockTypeMap[stockType],
+	// }
+	// json, err := e.getAuthJSON(e.host+"order_info.do", params)
+	// if err != nil {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrders() error, ", err)
+	// 	return false
+	// }
+	// if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrders() error, ", strings.TrimSpace(json.Get("msg").MustString()))
+	// 	return false
+	// }
+	// count := len(json.MustArray())
+	// for i := 0; i < count; i++ {
+	// 	orderJSON := json.GetIndex(i)
+	// 	orders = append(orders, Order{
+	// 		ID:         fmt.Sprint(orderJSON.Get("id").Interface()),
+	// 		Price:      conver.Float64Must(orderJSON.Get("order_price").Interface()),
+	// 		Amount:     conver.Float64Must(orderJSON.Get("order_amount").Interface()),
+	// 		DealAmount: conver.Float64Must(orderJSON.Get("processed_amount").Interface()),
+	// 		TradeType:  e.tradeTypeMap[orderJSON.Get("type").MustInt()],
+	// 		StockType:  stockType,
+	// 	})
+	// }
+	// return orders
+	return nil
 }
 
 // GetTrades get all filled orders recently
 func (e *HuobiPro) GetTrades(stockType string) interface{} {
-	stockType = strings.ToUpper(stockType)
-	orders := []Order{}
-	if _, ok := e.stockTypeMap[stockType]; !ok {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetTrades() error, unrecognized stockType: ", stockType)
-		return false
-	}
-	params := []string{
-		"method=get_new_deal_orders",
-		"coin_type=" + e.stockTypeMap[stockType],
-	}
-	json, err := e.getAuthJSON(e.host+"order_history.do", params)
-	if err != nil {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetTrades() error, ", err)
-		return false
-	}
-	if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetTrades() error, ", strings.TrimSpace(json.Get("msg").MustString()))
-		return false
-	}
-	count := len(json.MustArray())
-	for i := 0; i < count; i++ {
-		orderJSON := json.GetIndex(i)
-		orders = append(orders, Order{
-			ID:         fmt.Sprint(orderJSON.Get("id").Interface()),
-			Price:      conver.Float64Must(orderJSON.Get("order_price").Interface()),
-			Amount:     conver.Float64Must(orderJSON.Get("order_amount").Interface()),
-			DealAmount: conver.Float64Must(orderJSON.Get("processed_amount").Interface()),
-			TradeType:  e.tradeTypeMap[orderJSON.Get("type").MustInt()],
-			StockType:  stockType,
-		})
-	}
-	return orders
+	// stockType = strings.ToUpper(stockType)
+	// orders := []Order{}
+	// if _, ok := e.stockTypeMap[stockType]; !ok {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetTrades() error, unrecognized stockType: ", stockType)
+	// 	return false
+	// }
+	// params := []string{
+	// 	"method=get_new_deal_orders",
+	// 	"coin_type=" + e.stockTypeMap[stockType],
+	// }
+	// json, err := e.getAuthJSON(e.host+"order_history.do", params)
+	// if err != nil {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetTrades() error, ", err)
+	// 	return false
+	// }
+	// if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetTrades() error, ", strings.TrimSpace(json.Get("msg").MustString()))
+	// 	return false
+	// }
+	// count := len(json.MustArray())
+	// for i := 0; i < count; i++ {
+	// 	orderJSON := json.GetIndex(i)
+	// 	orders = append(orders, Order{
+	// 		ID:         fmt.Sprint(orderJSON.Get("id").Interface()),
+	// 		Price:      conver.Float64Must(orderJSON.Get("order_price").Interface()),
+	// 		Amount:     conver.Float64Must(orderJSON.Get("order_amount").Interface()),
+	// 		DealAmount: conver.Float64Must(orderJSON.Get("processed_amount").Interface()),
+	// 		TradeType:  e.tradeTypeMap[orderJSON.Get("type").MustInt()],
+	// 		StockType:  stockType,
+	// 	})
+	// }
+	// return orders
+	return nil
 }
 
 // CancelOrder cancel an order
 func (e *HuobiPro) CancelOrder(order Order) bool {
-	params := []string{
-		"method=cancel_order",
-		"coin_type=" + e.stockTypeMap[order.StockType],
-		"id=" + order.ID,
-	}
-	json, err := e.getAuthJSON(e.host, params, "market=cny")
-	if err != nil {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "CancelOrder() error, ", err)
-		return false
-	}
-	if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "CancelOrder() error, ", strings.TrimSpace(json.Get("msg").MustString()))
-		return false
-	}
-	if json.Get("result").MustString() == "success" {
-		e.logger.Log(constant.CANCEL, order.StockType, order.Price, order.Amount-order.DealAmount, order)
-		return true
-	}
-	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "CancelOrder() error, ", json.Get("msg").Interface())
+	// params := []string{
+	// 	"method=cancel_order",
+	// 	"coin_type=" + e.stockTypeMap[order.StockType],
+	// 	"id=" + order.ID,
+	// }
+	// json, err := e.getAuthJSON(e.host, params, "market=cny")
+	// if err != nil {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "CancelOrder() error, ", err)
+	// 	return false
+	// }
+	// if code := conver.IntMust(json.Get("code").Interface()); code > 0 {
+	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "CancelOrder() error, ", strings.TrimSpace(json.Get("msg").MustString()))
+	// 	return false
+	// }
+	// if json.Get("result").MustString() == "success" {
+	// 	e.logger.Log(constant.CANCEL, order.StockType, order.Price, order.Amount-order.DealAmount, order)
+	// 	return true
+	// }
+	// e.logger.Log(constant.ERROR, "", 0.0, 0.0, "CancelOrder() error, ", json.Get("msg").Interface())
+	// return false
 	return false
 }
 
@@ -362,7 +374,7 @@ func (e *HuobiPro) getTicker(stockType string, sizes ...interface{}) (ticker Tic
 	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
 		size = conver.IntMust(sizes[0])
 	}
-	resp, err := get(fmt.Sprintf("http://api.huobipro.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
+	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
 	if err != nil {
 		err = fmt.Errorf("GetTicker() error, %+v", err)
 		return
@@ -423,7 +435,7 @@ func (e *HuobiPro) GetRecords(stockType, period string, sizes ...interface{}) in
 	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
 		size = conver.IntMust(sizes[0])
 	}
-	resp, err := get(fmt.Sprintf("http://api.huobipro.com/staticmarket/%v_kline_%v_json.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), e.recordsPeriodMap[period]))
+	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/%v_kline_%v_json.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), e.recordsPeriodMap[period]))
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetRecords() error, ", err)
 		return false

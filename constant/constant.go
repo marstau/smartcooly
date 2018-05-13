@@ -16,7 +16,7 @@ const (
 const (
 	OkCoinCn     = "okcoin.cn"
 	Huobi        = "huobi"
-	HuobiPro     = "huobiPro"
+	HuobiPro     = "huobipro"
 	Poloniex     = "poloniex"
 	Btcc         = "btcc"
 	Chbtc        = "chbtc"
