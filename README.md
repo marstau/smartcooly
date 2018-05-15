@@ -33,7 +33,7 @@ Please replace *{{VERSION}}*, *{{OS}}*, *{{ARCH}}* first.
 ### From Docker
 
 ```shell
-docker run --name=samaritan -p 19876:9876 miaolz123/samaritan
+docker run --name=samaritan -p 19876:9876 marstau/samaritan
 ```
 
 Then, samaritan is running at `http://localhost:19876`.
@@ -561,7 +561,7 @@ However, the [ISSUE](https://github.com/marstau/samaritan/issues) is welcome.
 
 ## License
 
-Copyright (c) 2016 [miaolz123](https://github.com/miaolz123) by MIT
+Copyright (c) 2016 [marstau](https://github.com/marstau) by MIT
 
 # Reference
 
