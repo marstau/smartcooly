@@ -8,14 +8,14 @@ import (
 	"github.com/bitly/go-simplejson"
 	"net/http"
 	"github.com/nntaoli-project/GoEx"
-	"github.com/nntaoli-project/GoEx/huobi"
+	"github.com/nntaoli-project/GoEx/bibox"
 	"github.com/marstau/conver"
 	"github.com/marstau/samaritan/constant"
 	"github.com/marstau/samaritan/model"
 )
 
-// HuobiPro the exchange struct of huobipro.com
-type HuobiPro struct {
+// Bibox the exchange struct of Bibox.com
+type Bibox struct {
 	stockTypeMap     map[string]string
 	tradeTypeMap     map[int]string
 	recordsPeriodMap map[string]string
@@ -23,22 +23,23 @@ type HuobiPro struct {
 	records          map[string][]Record
 	host             string
 	logger           model.Logger
-	api              *huobi.HuobiPro
+	api              *bibox.Bibox
 
 	limit     float64
 	lastSleep int64
 	lastTimes int64
 }
 
-// NewHuobiPro create an exchange struct of huobipro.com
-func NewHuobiPro(opt Option) Exchange {
-	hbpro := huobi.NewHuobiPro(http.DefaultClient, opt.AccessKey, opt.SecretKey, "")
-	// if err != nil {
-	// 	fmt.Println("get ticker failed:", err.Error())
-	// 	return
-	// }
+// NewBibox create an exchange struct of Bibox.com
+func NewBibox(opt Option) Exchange {
+	fmt.Println("NewBibox")
+	bb := bibox.NewBibox(http.DefaultClient, opt.AccessKey, opt.SecretKey, "")
+	if bb == nil {
+		fmt.Println("NewBibox failed:")
+		return nil
+	}
 
-	return &HuobiPro{
+	return &Bibox{
 		stockTypeMap: map[string]string{
 			"BTC/CNY": "1",
 			"LTC/CNY": "2",
@@ -64,7 +65,7 @@ func NewHuobiPro(opt Option) Exchange {
 		},
 		records: make(map[string][]Record),
 		logger:  model.Logger{TraderID: opt.TraderID, ExchangeType: opt.Type},
-		api:  hbpro,
+		api:  bb,
 
 		limit:     10.0,
 		lastSleep: time.Now().UnixNano(),
@@ -75,18 +76,18 @@ func NewHuobiPro(opt Option) Exchange {
 
 
 // Log print something to console
-func (e *HuobiPro) Log(msgs ...interface{}) {
+func (e *Bibox) Log(msgs ...interface{}) {
 	e.logger.Log(constant.INFO, "", 0.0, 0.0, msgs...)
 }
 
 // GetType get the type of this exchange
-func (e *HuobiPro) GetType() string {
+func (e *Bibox) GetType() string {
 	// return e.api.Type
 	return ""
 }
 
 // GetName get the name of this exchange
-func (e *HuobiPro) GetName() string {
+func (e *Bibox) GetName() string {
 	// return e.api.Name
 	name, err := e.api.GetAccountId()
 	if err != nil {
@@ -97,13 +98,13 @@ func (e *HuobiPro) GetName() string {
 }
 
 // SetLimit set the limit calls amount per second of this exchange
-func (e *HuobiPro) SetLimit(times interface{}) float64 {
+func (e *Bibox) SetLimit(times interface{}) float64 {
 	e.limit = conver.Float64Must(times)
 	return e.limit
 }
 
 // AutoSleep auto sleep to achieve the limit calls amount per second of this exchange
-func (e *HuobiPro) AutoSleep() {
+func (e *Bibox) AutoSleep() {
 	now := time.Now().UnixNano()
 	interval := 1e+9/e.limit*conver.Float64Must(e.lastTimes) - conver.Float64Must(now-e.lastSleep)
 	if interval > 0.0 {
@@ -114,11 +115,11 @@ func (e *HuobiPro) AutoSleep() {
 }
 
 // GetMinAmount get the min trade amonut of this exchange
-func (e *HuobiPro) GetMinAmount(stock string) float64 {
+func (e *Bibox) GetMinAmount(stock string) float64 {
 	return e.minAmountMap[stock]
 }
 
-// func (e *HuobiPro) getAuthJSON(url string, params []string, optionals ...string) (json *simplejson.Json, err error) {
+// func (e *Bibox) getAuthJSON(url string, params []string, optionals ...string) (json *simplejson.Json, err error) {
 // 	e.lastTimes++
 // 	params = append(params, []string{
 // 		"access_key=" + e.api.AccessKey,
@@ -135,7 +136,9 @@ func (e *HuobiPro) GetMinAmount(stock string) float64 {
 // }
 
 // GetAccount get the account detail of this exchange
-func (e *HuobiPro) GetAccount() interface{} {
+func (e *Bibox) GetAccount() interface{} {
+	fmt.Println("GetAccount")
+	e.logger.Log(constant.INFO, "", 0.0, 0.0, "GetAccount")
 	// params := []string{
 	// 	"method=get_account_info",
 	// }
@@ -165,7 +168,7 @@ func (e *HuobiPro) GetAccount() interface{} {
 
 
 // Trade place an order
-func (e *HuobiPro) Trade(tradeType string, stockType string, _price, _amount interface{}, msgs ...interface{}) interface{} {
+func (e *Bibox) Trade(tradeType string, stockType string, _price, _amount interface{}, msgs ...interface{}) interface{} {
 	// stockType = strings.ToUpper(stockType)
 	// tradeType = strings.ToUpper(tradeType)
 	// price := conver.Float64Must(_price)
@@ -186,7 +189,7 @@ func (e *HuobiPro) Trade(tradeType string, stockType string, _price, _amount int
 	return nil
 }
 
-func (e *HuobiPro) buy(stockType string, price, amount float64, msgs ...interface{}) interface{} {
+func (e *Bibox) buy(stockType string, price, amount float64, msgs ...interface{}) interface{} {
 	// params := []string{
 	// 	"coin_type=" + e.stockTypeMap[stockType],
 	// 	fmt.Sprintf("amount=%v", amount),
@@ -211,7 +214,7 @@ func (e *HuobiPro) buy(stockType string, price, amount float64, msgs ...interfac
 	return nil
 }
 
-func (e *HuobiPro) sell(stockType string, price, amount float64, msgs ...interface{}) interface{} {
+func (e *Bibox) sell(stockType string, price, amount float64, msgs ...interface{}) interface{} {
 	// params := []string{
 	// 	"coin_type=" + e.stockTypeMap[stockType],
 	// 	fmt.Sprintf("amount=%v", amount),
@@ -237,7 +240,7 @@ func (e *HuobiPro) sell(stockType string, price, amount float64, msgs ...interfa
 }
 
 // GetOrder get details of an order
-func (e *HuobiPro) GetOrder(stockType, id string) interface{} {
+func (e *Bibox) GetOrder(stockType, id string) interface{} {
 	// stockType = strings.ToUpper(stockType)
 	// if _, ok := e.stockTypeMap[stockType]; !ok {
 	// 	e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetOrder() error, unrecognized stockType: ", stockType)
@@ -269,7 +272,7 @@ func (e *HuobiPro) GetOrder(stockType, id string) interface{} {
 }
 
 // GetOrders get all unfilled orders
-func (e *HuobiPro) GetOrders(stockType string) interface{} {
+func (e *Bibox) GetOrders(stockType string) interface{} {
 	// stockType = strings.ToUpper(stockType)
 	// orders := []Order{}
 	// if _, ok := e.stockTypeMap[stockType]; !ok {
@@ -306,7 +309,7 @@ func (e *HuobiPro) GetOrders(stockType string) interface{} {
 }
 
 // GetTrades get all filled orders recently
-func (e *HuobiPro) GetTrades(stockType string) interface{} {
+func (e *Bibox) GetTrades(stockType string) interface{} {
 	// stockType = strings.ToUpper(stockType)
 	// orders := []Order{}
 	// if _, ok := e.stockTypeMap[stockType]; !ok {
@@ -343,7 +346,7 @@ func (e *HuobiPro) GetTrades(stockType string) interface{} {
 }
 
 // CancelOrder cancel an order
-func (e *HuobiPro) CancelOrder(order Order) bool {
+func (e *Bibox) CancelOrder(order Order) bool {
 	// params := []string{
 	// 	"method=cancel_order",
 	// 	"coin_type=" + e.stockTypeMap[order.StockType],
@@ -368,7 +371,7 @@ func (e *HuobiPro) CancelOrder(order Order) bool {
 }
 
 // // getTicker get market ticker & depth
-// func (e *HuobiPro) getTicker(stockType string, sizes ...interface{}) (ticker Ticker, err error) {
+// func (e *Bibox) getTicker(stockType string, sizes ...interface{}) (ticker Ticker, err error) {
 // 	stockType = strings.ToUpper(stockType)
 // 	if _, ok := e.stockTypeMap[stockType]; !ok {
 // 		err = fmt.Errorf("GetTicker() error, unrecognized stockType: %+v", stockType)
@@ -378,7 +381,7 @@ func (e *HuobiPro) CancelOrder(order Order) bool {
 // 	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
 // 		size = conver.IntMust(sizes[0])
 // 	}
-// 	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
+// 	resp, err := get(fmt.Sprintf("http://api.bibox.com/staticmarket/depth_%v_%v.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), size))
 // 	if err != nil {
 // 		err = fmt.Errorf("GetTicker() error, %+v", err)
 // 		return
@@ -415,7 +418,7 @@ func (e *HuobiPro) CancelOrder(order Order) bool {
 // }
 
 // GetTicker get market ticker & depth
-func (e *HuobiPro) GetTicker(stockType string, sizes ...interface{}) interface{} {
+func (e *Bibox) GetTicker(stockType string, sizes ...interface{}) interface{} {
 	ticker, err := e.api.GetTicker(goex.BTC_USDT)
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, err)
@@ -425,7 +428,7 @@ func (e *HuobiPro) GetTicker(stockType string, sizes ...interface{}) interface{}
 }
 
 // GetRecords get candlestick data
-func (e *HuobiPro) GetRecords(stockType, period string, sizes ...interface{}) interface{} {
+func (e *Bibox) GetRecords(stockType, period string, sizes ...interface{}) interface{} {
 	stockType = strings.ToUpper(stockType)
 	if _, ok := e.stockTypeMap[stockType]; !ok {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetRecords() error, unrecognized stockType: ", stockType)
@@ -439,7 +442,7 @@ func (e *HuobiPro) GetRecords(stockType, period string, sizes ...interface{}) in
 	if len(sizes) > 0 && conver.IntMust(sizes[0]) > 0 {
 		size = conver.IntMust(sizes[0])
 	}
-	resp, err := get(fmt.Sprintf("http://api.huobi.com/staticmarket/%v_kline_%v_json.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), e.recordsPeriodMap[period]))
+	resp, err := get(fmt.Sprintf("http://api.bibox.com/staticmarket/%v_kline_%v_json.js", strings.ToLower(strings.TrimSuffix(stockType, "/CNY")), e.recordsPeriodMap[period]))
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetRecords() error, ", err)
 		return false
