@@ -18,6 +18,7 @@ var (
 		constant.OkCoinCn:     api.NewOKCoinCn,
 		constant.Huobi:        api.NewHuobi,
 		constant.HuobiPro:     api.NewHuobiPro,
+		constant.Bibox:        api.NewBibox,
 		constant.Poloniex:     api.NewPoloniex,
 		constant.Btcc:         api.NewBtcc,
 		constant.Chbtc:        api.NewChbtc,

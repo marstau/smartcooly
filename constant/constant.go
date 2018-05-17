@@ -17,6 +17,7 @@ const (
 	OkCoinCn     = "okcoin.cn"
 	Huobi        = "huobi"
 	HuobiPro     = "huobipro"
+	Bibox        = "bibox"
 	Poloniex     = "poloniex"
 	Btcc         = "btcc"
 	Chbtc        = "chbtc"
@@ -65,5 +66,5 @@ const (
 // some variables
 var (
 	Consts        = []string{"BTC", "LTC", "M", "M5", "M15", "M30", "H", "D", "W"}
-	ExchangeTypes = []string{OkCoinCn, Huobi, HuobiPro, Poloniex, Btcc, Chbtc, OkcoinFuture}
+	ExchangeTypes = []string{OkCoinCn, Huobi, HuobiPro, Bibox, Poloniex, Btcc, Chbtc, OkcoinFuture}
 )
