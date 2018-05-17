@@ -7,8 +7,8 @@ import (
 
 	"github.com/bitly/go-simplejson"
 	"net/http"
-	"github.com/nntaoli-project/GoEx"
-	"github.com/nntaoli-project/GoEx/bibox"
+	"github.com/marstau/GoEx"
+	"github.com/marstau/GoEx/bibox"
 	"github.com/marstau/conver"
 	"github.com/marstau/samaritan/constant"
 	"github.com/marstau/samaritan/model"
@@ -137,8 +137,7 @@ func (e *Bibox) GetMinAmount(stock string) float64 {
 
 // GetAccount get the account detail of this exchange
 func (e *Bibox) GetAccount() interface{} {
-	fmt.Println("GetAccount")
-	e.logger.Log(constant.INFO, "", 0.0, 0.0, "GetAccount")
+	fmt.Println("GetAccount1")
 	// params := []string{
 	// 	"method=get_account_info",
 	// }
@@ -149,7 +148,7 @@ func (e *Bibox) GetAccount() interface{} {
 	// 	return false
 	// }
 
-	accountid, err := e.api.GetAccountId()
+	accountid, err := e.api.GetAccount()
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetAccount() error, ", err)
 		return nil
