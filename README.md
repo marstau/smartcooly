@@ -559,6 +559,13 @@ Contributions are not accepted in principle until the basic infrastructure is co
 
 However, the [ISSUE](https://github.com/marstau/samaritan/issues) is welcome.
 
+## Denote
+
+eth:0x6E6dDDE24C79e94633CACAa442FadDcD41Af31Bd
+
+btc:1KaJo5bFTpFzJXSYDiFjYkHELvcQdy9NSn
+
+
 ## License
 
 Copyright (c) 2016 [marstau](https://github.com/marstau) by MIT
