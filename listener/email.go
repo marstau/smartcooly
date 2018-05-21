@@ -24,13 +24,20 @@ var (
 	}
 )
 
+// Email struct
+type Email struct {
+	Title     int64
+	Content   string
+	Type      int64
+}
+
 
 func init() {
 	hostStart := strings.Index(user, "@")
 	host = HOSTS[strings.ToLower(user[hostStart+1:])]
 }
 
-func send(user, password, host, to, subject, body, mailtype string) error {
+func send(user, password, host, to, title, subject, body, mailtype string) error {
 	hp := strings.Split(host, ":")
 	auth := smtp.PlainAuth("", user, password, hp[0])
 	var content_type string
@@ -40,13 +47,13 @@ func send(user, password, host, to, subject, body, mailtype string) error {
 		content_type = "Content-Type: text/plain" + "; charset=UTF-8"
 	}
 
-	msg := []byte("To: " + to + "\r\nFrom: " + user + ">\r\nSubject: " + "\r\n" + content_type + "\r\n\r\n" + body)
+	msg := []byte("To: " + to + "\r\nFrom: " + user + ">\r\nSubject: " + title + "\r\n" + content_type + "\r\n\r\n" + body)
 	send_to := strings.Split(to, ";")
 	err := smtp.SendMail(host, auth, user, send_to, msg)
 	return err
 }
 
-func SendEmail() {
+func (e Email) SendEmail(title string, bodyTitle string) {
 	// Configure hermes by setting a theme and your product info
 	h := hermes.Hermes{
 	    // Optional Theme
@@ -62,6 +69,7 @@ func SendEmail() {
 
 	email := hermes.Email{
 		Body: hermes.Body{
+			Title: bodyTitle,
 			Name: "Jon Snow",
 			Intros: []string{
 				"Your order has been processed successfully.",
@@ -113,7 +121,7 @@ func SendEmail() {
 	    panic(err) // Tip: Handle error with something else than a panic ;)
 	}
 
-	err = send(user, password, host, to, emailText, emailBody, "html")
+	err = send(user, password, host, to, title, emailText, emailBody, "html")
 	if err != nil {
 		fmt.Println("Send mail error!")
 		fmt.Println(err)

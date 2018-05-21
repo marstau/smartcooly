@@ -7,6 +7,7 @@ import (
 	"github.com/marstau/samaritan/api"
 	"github.com/marstau/samaritan/constant"
 	"github.com/marstau/samaritan/model"
+	"github.com/marstau/samaritan/listener"
 	"github.com/robertkrimen/otto"
 )
 
@@ -36,6 +37,7 @@ type Global struct {
 	tasks     []task
 	execed    bool
 	statusLog string
+	Email     listener.Email
 }
 
 // GetTraderStatus ...

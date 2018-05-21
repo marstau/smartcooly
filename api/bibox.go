@@ -32,7 +32,6 @@ type Bibox struct {
 
 // NewBibox create an exchange struct of Bibox.com
 func NewBibox(opt Option) Exchange {
-	fmt.Println("NewBibox")
 	bb := bibox.NewBibox(http.DefaultClient, opt.AccessKey, opt.SecretKey, "")
 	if bb == nil {
 		fmt.Println("NewBibox failed:")
@@ -137,7 +136,6 @@ func (e *Bibox) GetMinAmount(stock string) float64 {
 
 // GetAccount get the account detail of this exchange
 func (e *Bibox) GetAccount() interface{} {
-	fmt.Println("GetAccount1")
 	// params := []string{
 	// 	"method=get_account_info",
 	// }

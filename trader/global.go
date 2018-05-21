@@ -17,6 +17,11 @@ type task struct {
 	args []interface{}
 }
 
+// Send email ...
+func (g *Global) SendEmail(msgs ...interface{}) {
+	g.Email.SendEmail(conver.StringMust(msgs[0]), conver.StringMust(msgs[1]))
+}
+
 // Sleep ...
 func (g *Global) Sleep(intervals ...interface{}) {
 	interval := int64(0)
