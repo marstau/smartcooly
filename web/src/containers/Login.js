@@ -84,7 +84,7 @@ class Login extends React.Component {
           margin: 24,
           fontSize: '30px',
           textAlign: 'center',
-        }}>Samaritan</h1>
+        }}>smartcooly</h1>
         <Form horizontal onSubmit={this.handleSubmit}>
           <Form.Item
             {...formItemLayout}

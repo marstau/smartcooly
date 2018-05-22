@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/marstau/conver"
-	"github.com/marstau/samaritan/constant"
+	"github.com/marstau/smartcooly/constant"
 	"github.com/robertkrimen/otto"
 )
 

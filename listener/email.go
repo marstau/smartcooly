@@ -5,7 +5,7 @@ import (
 	"net/smtp"
 	"strings"
 	"github.com/matcornic/hermes"
-	"github.com/marstau/samaritan/config"
+	"github.com/marstau/smartcooly/config"
 )
 
 var (

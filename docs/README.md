@@ -1,27 +1,27 @@
-# Samaritan service
+# smartcooly service
 
 ## Installation
 
-You can install samaritan from **installation package** or **Docker**.
+You can install smartcooly from **installation package** or **Docker**.
 
 The default username and password are `admin`, please modify them immediately after login!
 
 ### From installation package
 
-1. Download the samaritan installation package on [this page](https://github.com/marstau/samaritan/releases)
-2. Unzip the samaritan installation package
-3. Enter the extracted samaritan installation directory
-4. Run `samaritan`
+1. Download the smartcooly installation package on [this page](https://github.com/marstau/smartcooly/releases)
+2. Unzip the smartcooly installation package
+3. Enter the extracted smartcooly installation directory
+4. Run `smartcooly`
 
-Then, samaritan is running at `http://localhost:9876`.
+Then, smartcooly is running at `http://localhost:9876`.
 
 **Linux & Mac user quick start command**
 
 ```shell
-wget https://github.com/marstau/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
-tar -xzvf samaritan_{{OS}}_{{ARCH}}.tar.gz
-cd samaritan_{{OS}}_{{ARCH}}
-./samaritan
+wget https://github.com/marstau/smartcooly/releases/download/v{{VERSION}}/smartcooly_{{OS}}_{{ARCH}}.tar.gz
+tar -xzvf smartcooly_{{OS}}_{{ARCH}}.tar.gz
+cd smartcooly_{{OS}}_{{ARCH}}
+./smartcooly
 ```
 
 Please replace *{{VERSION}}*, *{{OS}}*, *{{ARCH}}* first.
@@ -29,10 +29,10 @@ Please replace *{{VERSION}}*, *{{OS}}*, *{{ARCH}}* first.
 ### From Docker
 
 ```shell
-docker run --name=samaritan -p 19876:9876 miaolz123/samaritan
+docker run --name=smartcooly -p 19876:9876 miaolz123/smartcooly
 ```
 
-Then, samaritan is running at `http://localhost:19876`.
+Then, smartcooly is running at `http://localhost:19876`.
 
 ## Supported exchanges
 
@@ -50,21 +50,21 @@ Then, samaritan is running at `http://localhost:19876`.
 
 ### Add an Exchange
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/add-exchange.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/add-exchange.png)
 
 ### Add an Algorithm
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/add-algorithm.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/add-algorithm.png)
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/edit-algorithm.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/edit-algorithm.png)
 
 ### Deploy an Algorithm
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/add-trader.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/add-trader.png)
 
 ### Run a Trader
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/run-trader.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/run-trader.png)
 
 # Algorithm Reference
 

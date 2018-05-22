@@ -11,8 +11,8 @@ import (
 
 	"github.com/bitly/go-simplejson"
 	"github.com/marstau/conver"
-	"github.com/marstau/samaritan/constant"
-	"github.com/marstau/samaritan/model"
+	"github.com/marstau/smartcooly/constant"
+	"github.com/marstau/smartcooly/model"
 )
 
 // OandaV20 the exchange struct of oanda.com v20

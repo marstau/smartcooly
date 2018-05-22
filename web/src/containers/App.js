@@ -106,7 +106,7 @@ class App extends Component {
                 <Icon name="id-card-o" fixedWidth size={collapse ? '2x' : undefined} /><span className="nav-text">User</span>
               </Menu.Item>
               <Menu.Item key="docs">
-                <a href="http://samaritan.stockdb.org" target='_blank'>
+                <a href="http://smartcooly.stockdb.org" target='_blank'>
                   <Icon name="book" fixedWidth size={collapse ? '2x' : undefined} /><span className="nav-text">Docs</span>
                 </a>
               </Menu.Item>
@@ -125,7 +125,7 @@ class App extends Component {
               </div>
             </div>
             <div className="ant-layout-footer">
-              <a href="https://github.com/marstau/samaritan">Samaritan</a> © 2016
+              <a href="https://github.com/marstau/smartcooly">smartcooly</a> © 2016
             </div>
           </div>
         </div>

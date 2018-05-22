@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/hprose/hprose-golang/rpc"
-	"github.com/marstau/samaritan/constant"
-	"github.com/marstau/samaritan/model"
+	"github.com/marstau/smartcooly/constant"
+	"github.com/marstau/smartcooly/model"
 )
 
 type user struct{}

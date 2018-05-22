@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/marstau/samaritan/constant"
+	"github.com/marstau/smartcooly/constant"
 )
 
 // Log struct

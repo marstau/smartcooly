@@ -10,8 +10,8 @@ import (
 	"github.com/marstau/GoEx"
 	"github.com/marstau/GoEx/huobi"
 	"github.com/marstau/conver"
-	"github.com/marstau/samaritan/constant"
-	"github.com/marstau/samaritan/model"
+	"github.com/marstau/smartcooly/constant"
+	"github.com/marstau/smartcooly/model"
 )
 
 // HuobiPro the exchange struct of huobipro.com

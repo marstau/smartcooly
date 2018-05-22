@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/hprose/hprose-golang/rpc"
-	"github.com/marstau/samaritan/config"
-	"github.com/marstau/samaritan/constant"
+	"github.com/marstau/smartcooly/config"
+	"github.com/marstau/smartcooly/constant"
 )
 
 type response struct {

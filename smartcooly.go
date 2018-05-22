@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/marstau/samaritan/handler"
+	"github.com/marstau/smartcooly/handler"
 )
 
 func main() {

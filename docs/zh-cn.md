@@ -1,27 +1,27 @@
-# Samaritan 服务
+# smartcooly 服务
 
 ## 安装
 
-你可以通过`安装包`或者`Docker`安装 Samaritan。
+你可以通过`安装包`或者`Docker`安装 smartcooly。
 
 默认的用户名和密码都是`admin`，请在登录后立即修改！
 
 ### 通过安装包
 
-1. 在[这个页面](https://github.com/marstau/samaritan/releases)下载 samaritan 安装包
-2. 解压 samaritan 安装包
-3. 进入 samaritan 安装目录
-4. 运行 `samaritan`
+1. 在[这个页面](https://github.com/marstau/smartcooly/releases)下载 smartcooly 安装包
+2. 解压 smartcooly 安装包
+3. 进入 smartcooly 安装目录
+4. 运行 `smartcooly`
 
-然后，samaritan 将运行在 `http://localhost:9876`。
+然后，smartcooly 将运行在 `http://localhost:9876`。
 
 **Linux & Mac 用户快速上手命令**
 
 ```shell
-wget https://github.com/marstau/samaritan/releases/download/v{{VERSION}}/samaritan_{{OS}}_{{ARCH}}.tar.gz
-tar -xzvf samaritan_{{OS}}_{{ARCH}}.tar.gz
-cd samaritan_{{OS}}_{{ARCH}}
-./samaritan
+wget https://github.com/marstau/smartcooly/releases/download/v{{VERSION}}/smartcooly_{{OS}}_{{ARCH}}.tar.gz
+tar -xzvf smartcooly_{{OS}}_{{ARCH}}.tar.gz
+cd smartcooly_{{OS}}_{{ARCH}}
+./smartcooly
 ```
 
 请先替换 *{{VERSION}}*, *{{OS}}*, *{{ARCH}}* 的值。
@@ -29,10 +29,10 @@ cd samaritan_{{OS}}_{{ARCH}}
 ### 通过 Docker
 
 ```shell
-docker run --name=samaritan -p 19876:9876 miaolz123/samaritan
+docker run --name=smartcooly -p 19876:9876 miaolz123/smartcooly
 ```
 
-然后，samaritan 将运行在 `http://localhost:19876`。
+然后，smartcooly 将运行在 `http://localhost:19876`。
 
 ## 支持的交易所
 
@@ -50,21 +50,21 @@ docker run --name=samaritan -p 19876:9876 miaolz123/samaritan
 
 ### 添加一个交易所
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/add-exchange.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/add-exchange.png)
 
 ### 添加一个量化交易算法策略
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/add-algorithm.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/add-algorithm.png)
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/edit-algorithm.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/edit-algorithm.png)
 
 ### 部署一个算法策略
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/add-trader.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/add-trader.png)
 
 ### 运行一个算法策略
 
-![](https://raw.githubusercontent.com/miaolz123/samaritan/master/docs/_media/run-trader.png)
+![](https://raw.githubusercontent.com/miaolz123/smartcooly/master/docs/_media/run-trader.png)
 
 # 算法策略编写说明
 

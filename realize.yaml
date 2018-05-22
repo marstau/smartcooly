@@ -7,7 +7,7 @@ settings:
   config:
     flimit: 0
 projects:
-- name: samaritan
+- name: smartcooly
   path: /
   run: true
   bin: true
