@@ -30,13 +30,22 @@ cd smartcooly_{{OS}}_{{ARCH}}
 
 Please replace *{{VERSION}}*, *{{OS}}*, *{{ARCH}}* first.
 
-### From Docker
+### by Docker
 
 ```shell
 docker run --name=smartcooly -p 19876:9876 marstau/smartcooly
 ```
 
 Then, smartcooly is running at `http://localhost:19876`.
+
+### by heroku
+
+```
+heroku addons:create heroku-postgresql:hobby-basic -a smartcooly
+heroku buildpacks:add https://github.com/debitoor/ssh-private-key-buildpack.git -a smartcooly
+heroku config:set SSH_KEY=$(cat ~/.ssh/id_rsa | base64)  -a smartcooly
+heroku buildpacks:add heroku/go -a smartcooly
+```
 
 ## Supported exchanges
 

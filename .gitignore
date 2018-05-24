@@ -7,6 +7,7 @@
 _obj
 _test
 
+
 # Architecture specific extensions/prefixes
 *.[568vq]
 [568vq].out
@@ -18,6 +19,8 @@ _cgo_gotypes.go
 _cgo_export.*
 
 _testmain.go
+/vendor/*/
+!/vendor/golang.org/
 
 *.exe
 *.test
@@ -27,7 +30,6 @@ _testmain.go
 .vscode
 *.db
 cache*
-web/dist/
 custom/*.ini
 dist.zip
 smartcooly

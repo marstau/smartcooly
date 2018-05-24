@@ -4,6 +4,8 @@ import (
 	"log"
 	"strings"
 	"time"
+	"fmt"
+	"os"
 
 	"github.com/hprose/hprose-golang/io"
 	"github.com/jinzhu/gorm"
@@ -17,11 +19,48 @@ import (
 var (
 	// DB Database
 	DB     *gorm.DB
-	dbType = config.String("dbtype")
-	dbURL  = config.String("dburl")
+	dbType string
+	dbURL  string
+	DBTYPES = map[string]string {
+		"postgres" : "Postgres",
+	}
 )
 
 func init() {
+
+	if os.Getenv("DATABASE_URL") != "" {
+		url := os.Getenv("DATABASE_URL")
+
+		step := 0
+		slashStep := 0
+		var strs [6]string
+		for i := 0; i < len(url); i++ {
+			c := url[i]
+
+			if c == ':' || c == '@' {
+				step++
+				continue
+			} else if c == '/' {
+				slashStep++
+				continue
+			}
+
+			
+			if slashStep < 3 {
+				strs[step] += string(c)
+			} else {
+				strs[step + 1] += string(c)
+			}
+		}
+		dbType = DBTYPES[strs[0]]
+		dbURL = fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", strs[3], strs[4], strs[1], strs[5], strs[2])
+		
+		log.Printf("dbURL=%v", dbURL)
+	} else {
+		dbType = config.String("dbtype")
+		dbURL  = config.String("dburl")
+	}
+
 	io.Register((*User)(nil), "User", "json")
 	io.Register((*Exchange)(nil), "Exchange", "json")
 	io.Register((*Algorithm)(nil), "Algorithm", "json")

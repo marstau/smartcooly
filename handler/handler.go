@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"strings"
 	"time"
+	"os"
 
 	"github.com/hprose/hprose-golang/rpc"
 	"github.com/marstau/smartcooly/config"
@@ -27,7 +28,11 @@ func (e event) OnSendHeader(ctx *rpc.HTTPContext) {
 
 // Server ...
 func Server() {
-	port := config.String("port")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = config.String("port")
+	}
+
 	service := rpc.NewHTTPService()
 	handler := struct {
 		User      user
