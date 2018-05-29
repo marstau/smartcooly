@@ -98,6 +98,7 @@ func (user) Put(req model.User, password string, ctx rpc.Context) (resp response
 	user := model.User{
 		Username: req.Username,
 		Level:    req.Level,
+		Email:    req.Email,
 		Password: password,
 	}
 	if req.ID > 0 {
