@@ -2,7 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/miaolz123/smartcooly.svg)](https://travis-ci.org/miaolz123/smartcooly) [![Go Report Card](https://goreportcard.com/badge/github.com/marstau/smartcooly)](https://goreportcard.com/report/github.com/marstau/smartcooly) [![Github All Releases](https://img.shields.io/github/downloads/miaolz123/smartcooly/total.svg)](https://github.com/marstau/smartcooly/releases) [![Gitter](https://img.shields.io/gitter/room/miaolz123/smartcooly.svg)](https://gitter.im/miaolz123-smartcooly/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link) [![Docker Pulls](https://img.shields.io/docker/pulls/miaolz123/smartcooly.svg)](https://hub.docker.com/r/miaolz123/smartcooly/) [![license](https://img.shields.io/github/license/miaolz123/smartcooly.svg)](https://github.com/marstau/smartcooly/blob/master/LICENSE)
 
-[中文文档](http://smartcooly.stockdb.org/#/zh-cn)
+[中文文档](http://smartcooly.marstau.com/docs/1.0/api-zh-cn/)
 
 ## Installation
 
