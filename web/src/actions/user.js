@@ -16,6 +16,18 @@ function userLoginFailure(message) {
   return { type: actions.USER_LOGIN_FAILURE, message };
 }
 
+function userRegisterRequest() {
+  return { type: actions.USER_REGISTER_REQUEST };
+}
+
+function userRegisterSuccess(token, cluster) {
+  return { type: actions.USER_REGISTER_SUCCESS, token, cluster };
+}
+
+function userRegisterFailure(message) {
+  return { type: actions.USER_REGISTER_FAILURE, message };
+}
+
 export function UserLogin(cluster, username, password) {
   return (dispatch, getState) => {
     const uri = trimEnd(cluster, '/');
@@ -35,6 +47,24 @@ export function UserLogin(cluster, username, password) {
   };
 }
 
+export function UserRegister(cluster, username, password, email) {
+  return (dispatch, getState) => {
+    const uri = trimEnd(cluster, '/');
+    const client = Client.create(`${uri}/api`, { User: ['Register'] });
+
+    dispatch(userRegisterRequest());
+    client.User.Register(username, password, email, (resp) => {
+      if (resp.success) {
+        dispatch(userRegisterSuccess(resp.data, uri));
+      } else {
+        dispatch(userRegisterFailure(resp.message));
+      }
+    }, (resp, err) => {
+      dispatch(userLoginFailure('Server error'));
+      console.log('【Hprose】User.Register Error:', resp, err);
+    });
+  };
+}
 // Get
 
 function userGetRequest() {

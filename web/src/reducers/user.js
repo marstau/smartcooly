@@ -23,6 +23,10 @@ function user(state = USER_INIT, action) {
       return assign({}, state, {
         loading: true,
       });
+    case actions.USER_REGISTER_REQUEST:
+      return assign({}, state, {
+        loading: true,
+      });
     case actions.USER_LOGIN_SUCCESS:
       localStorage.setItem('cluster', action.cluster);
       localStorage.setItem('token', action.token);

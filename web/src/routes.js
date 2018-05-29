@@ -3,6 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
+import Register from './containers/Register';
 import User from './containers/User';
 import Exchange from './containers/Exchange';
 import Algorithm from './containers/Algorithm';
@@ -20,5 +21,6 @@ export default (
       <Route path="/algorithmLog" component={AlgorithmLog} />
     </Route>
     <Route path="/login" component={Login} />
+    <Route path="/register" component={Register} />
   </Route>
 );

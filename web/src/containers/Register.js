@@ -1,11 +1,11 @@
 import { ResetError } from '../actions';
-import { UserLogin } from '../actions/user';
+import { UserRegister } from '../actions/user';
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { Button, Form, Input, Icon, Tooltip, notification } from 'antd';
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
 
@@ -24,10 +24,10 @@ class Login extends React.Component {
 
     if (!messageErrorKey && user.message) {
       this.setState({
-        messageErrorKey: 'userLoginError',
+        messageErrorKey: 'userRegisterError',
       });
       notification['error']({
-        key: 'userLoginError',
+        key: 'userRegisterError',
         message: 'Error',
         description: String(user.message),
         onClose: () => {
@@ -66,7 +66,7 @@ class Login extends React.Component {
         return;
       }
 
-      dispatch(UserLogin(values.cluster, values.username, values.password));
+      dispatch(UserRegister(values.cluster, values.username, values.password));
     });
   }
 
@@ -121,9 +121,9 @@ class Login extends React.Component {
             </Tooltip>
           </Form.Item>
           <Form.Item wrapperCol={{ span: 6, offset: 9 }} style={{ marginTop: 24 }}>
-            <Button type="primary" htmlType="submit" className="login-form-button">Login</Button>
+            <Button type="primary" htmlType="submit" className="login-form-button">Register</Button>
           </Form.Item>
-          <a href="register"> <h5 style= {{ margin: 24, textAlign: 'center', }}>register</h5></a>
+          <a href="login"> <h5 style= {{ margin: 24, textAlign: 'center', }}>Login</h5></a>
         </Form>
       </div>
     );
@@ -134,4 +134,4 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default Form.create()(connect(mapStateToProps)(Login));
+export default Form.create()(connect(mapStateToProps)(Register));
