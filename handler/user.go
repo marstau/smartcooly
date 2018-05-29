@@ -32,6 +32,50 @@ func (user) Login(username, password string, ctx rpc.Context) (resp response) {
 	return
 }
 
+// Register ...
+func (u user) Register(req model.User, password string, ctx rpc.Context) (resp response) {
+	if req.Username == "" {
+		resp.Message = "Request data wrong"
+		return
+	}
+	
+	user := model.User{
+		Username: req.Username,
+		Level:    req.Level,
+		Email:    req.Email,
+		Password: password,
+	}
+	if req.ID > 0 {
+		if err := model.DB.First(&user, req.ID).Error; err != nil {
+			resp.Message = fmt.Sprint(err)
+			return
+		}
+		user.Level = req.Level
+		
+		if password != "" {
+			user.Password = password
+		}
+		if err := model.DB.Save(&user).Error; err != nil {
+			resp.Message = fmt.Sprint(err)
+			return
+		}
+		resp.Success = true
+		return
+	}
+	if password == "" {
+		resp.Message = "Password can't be empty"
+		return
+	}
+	
+	if err := model.DB.Create(&user).Error; err != nil {
+		resp.Message = fmt.Sprint(err)
+	} else {
+		resp.Success = true
+	}
+	return
+}
+
+
 // Get ...
 func (user) Get(_ string, ctx rpc.Context) (resp response) {
 	username := ctx.GetString("username")

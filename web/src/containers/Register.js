@@ -58,6 +58,10 @@ class Register extends React.Component {
     dispatch(ResetError());
   }
 
+  Login(e) {
+    browserHistory.push('/login');
+  }
+
   handleSubmit(e) {
     const { form, dispatch } = this.props;
 
@@ -87,7 +91,7 @@ class Register extends React.Component {
     const formItemLayout = {
       wrapperCol: { offset: 9, span: 6 },
     };
-    const cluster = localStorage.getItem('cluster') || document.URL.slice(0, -6);
+    const cluster = localStorage.getItem('cluster') || document.URL.slice(0, -9);
 
     return (
       <div style={{ paddingTop: windowHeight > 600 ? (windowHeight - 500) / 2 : windowHeight > 400 ? (windowHeight - 350) / 2 : 25 }}>
@@ -145,7 +149,7 @@ class Register extends React.Component {
           <Form.Item wrapperCol={{ span: 6, offset: 9 }} style={{ marginTop: 24 }}>
             <Button type="primary" htmlType="submit" className="login-form-button">Register</Button>
           </Form.Item>
-          <a href="login"> <h5 style= {{ margin: 24, textAlign: 'center', }}>Login</h5></a>
+          <a href="#" onClick={this.Login}> <h5 style= {{ margin: 24, textAlign: 'center', }}>Login</h5></a>
         </Form>
       </div>
     );

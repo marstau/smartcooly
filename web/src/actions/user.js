@@ -176,10 +176,10 @@ export function UserPut(req, password, size, page, order) {
 export function UserRegister(cluster, req, password) {
   return (dispatch, getState) => {
     const uri = trimEnd(cluster, '/');
-    const client = Client.create(`${uri}/api`, { User: ['Put'] });
+    const client = Client.create(`${uri}/api`, { User: ['Register'] });
     dispatch(userPutRequest());
 
-    client.User.Put(req, password, (resp) => {
+    client.User.Register(req, password, (resp) => {
       if (resp.success) {
         dispatch(userPutSuccess());
       } else {
@@ -187,7 +187,7 @@ export function UserRegister(cluster, req, password) {
       }
     }, (resp, err) => {
       dispatch(userPutFailure('Server error'));
-      console.log('【Hprose】User.Put Error:', resp, err);
+      console.log('【Hprose】User.Register Error:', resp, err);
     });
   };
 }

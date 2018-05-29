@@ -28,6 +28,7 @@ function user(state = USER_INIT, action) {
         loading: true,
       });
     case actions.USER_LOGIN_SUCCESS:
+    case actions.USER_REGISTER_SUCCESS:
       localStorage.setItem('cluster', action.cluster);
       localStorage.setItem('token', action.token);
       return assign({}, state, {
@@ -37,6 +38,7 @@ function user(state = USER_INIT, action) {
         token: action.token,
       });
     case actions.USER_LOGIN_FAILURE:
+    case actions.USER_REGISTER_FAILURE:
       localStorage.removeItem('cluster');
       localStorage.removeItem('token');
       return assign({}, state, {

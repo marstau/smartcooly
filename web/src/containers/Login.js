@@ -48,10 +48,18 @@ class Login extends React.Component {
     }
   }
 
+  Register(e) {
+    browserHistory.push('/register');
+  }
+
   componentWillUnmount() {
     const { dispatch } = this.props;
 
     dispatch(ResetError());
+  }
+
+  handleClick(e) {
+    console.log('handleClick=' + e.key);
   }
 
   handleSubmit(e) {
@@ -123,7 +131,7 @@ class Login extends React.Component {
           <Form.Item wrapperCol={{ span: 6, offset: 9 }} style={{ marginTop: 24 }}>
             <Button type="primary" htmlType="submit" className="login-form-button">Login</Button>
           </Form.Item>
-          <a href="register"> <h5 style= {{ margin: 24, textAlign: 'center', }}>register</h5></a>
+          <a href="#" onClick={this.Register}> <h5 style= {{ margin: 24, textAlign: 'center', }}>register</h5></a>
         </Form>
       </div>
     );
