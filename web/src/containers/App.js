@@ -125,7 +125,7 @@ class App extends Component {
               </div>
             </div>
             <div className="ant-layout-footer">
-              <a href="https://github.com/marstau/smartcooly">smartcooly</a> © 2016
+              <a href="https://github.com/marstau/smartcooly">smartcooly</a> © 2018
             </div>
           </div>
         </div>
