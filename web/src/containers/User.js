@@ -134,6 +134,7 @@ class User extends React.Component {
         id: info.id,
         username: values.username,
         level: values.level,
+        email: values.email,
       };
 
       dispatch(UserPut(req, values.password, pagination.pageSize, pagination.current, this.order));
@@ -216,8 +217,7 @@ class User extends React.Component {
           rowSelection={rowSelection}
           pagination={pagination}
           loading={user.loading}
-          onChange={this.handleTableChange}
-        />
+          onChange={this.handleTableChange}/>
         <Modal closable
           maskClosable={false}
           width="50%"
@@ -247,6 +247,17 @@ class User extends React.Component {
                 initialValue: info.level,
               })(
                 <InputNumber disabled={user.data && info.username === user.data.username} min={0} max={user.data ? user.data.level : 0} />
+              )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="Email"
+            >
+              {getFieldDecorator('email', {
+                rules: [{ required: true }],
+                initialValue: info.email,
+              })(
+                <Input disabled={info.id > 0} />
               )}
             </FormItem>
             <FormItem

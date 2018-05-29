@@ -48,6 +48,10 @@ class Register extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.order = 'id';
+  }
+
   componentWillUnmount() {
     const { dispatch } = this.props;
 
@@ -66,7 +70,14 @@ class Register extends React.Component {
         return;
       }
 
-      dispatch(UserRegister(values.cluster, values.username, values.password));
+      const req = {
+        id: 0,
+        username: values.username,
+        level: values.level,
+        email: values.email,
+      };
+
+      dispatch(UserRegister(values.cluster, req, values.password));
     });
   }
 
@@ -117,6 +128,17 @@ class Register extends React.Component {
                 rules: [{ required: true }],
               })(
                 <Input addonBefore={<Icon type="lock" />} type="password" placeholder="password" />
+              )}
+            </Tooltip>
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+          >
+            <Tooltip placement="right" title="Email">
+              {getFieldDecorator('email', {
+                rules: [{ required: true }],
+              })(
+                <Input addonBefore={<Icon type="mail" />} placeholder="email" />
               )}
             </Tooltip>
           </Form.Item>

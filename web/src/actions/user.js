@@ -47,24 +47,6 @@ export function UserLogin(cluster, username, password) {
   };
 }
 
-export function UserRegister(cluster, username, password, email) {
-  return (dispatch, getState) => {
-    const uri = trimEnd(cluster, '/');
-    const client = Client.create(`${uri}/api`, { User: ['Register'] });
-
-    dispatch(userRegisterRequest());
-    client.User.Register(username, password, email, (resp) => {
-      if (resp.success) {
-        dispatch(userRegisterSuccess(resp.data, uri));
-      } else {
-        dispatch(userRegisterFailure(resp.message));
-      }
-    }, (resp, err) => {
-      dispatch(userLoginFailure('Server error'));
-      console.log('【Hprose】User.Register Error:', resp, err);
-    });
-  };
-}
 // Get
 
 function userGetRequest() {
@@ -181,6 +163,25 @@ export function UserPut(req, password, size, page, order) {
       if (resp.success) {
         dispatch(userPutSuccess());
         dispatch(UserList(size, page, order));
+      } else {
+        dispatch(userPutFailure(resp.message));
+      }
+    }, (resp, err) => {
+      dispatch(userPutFailure('Server error'));
+      console.log('【Hprose】User.Put Error:', resp, err);
+    });
+  };
+}
+
+export function UserRegister(cluster, req, password) {
+  return (dispatch, getState) => {
+    const uri = trimEnd(cluster, '/');
+    const client = Client.create(`${uri}/api`, { User: ['Put'] });
+    dispatch(userPutRequest());
+
+    client.User.Put(req, password, (resp) => {
+      if (resp.success) {
+        dispatch(userPutSuccess());
       } else {
         dispatch(userPutFailure(resp.message));
       }
