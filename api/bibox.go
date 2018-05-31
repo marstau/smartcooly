@@ -494,6 +494,5 @@ func (e *Bibox) ExchangeRate(count string,stockType string) string {
 		return ""
 	}
 
-	e.logger.Log(constant.INFO, "", 0.0, 0.0, "ticker=", ticker)
-	return ""
+	return conver.StringMust(conver.Float64Must(count)/ticker.Last)
 }
