@@ -454,3 +454,9 @@ func (e *OKCoinCn) GetRecords(stockType, period string, sizes ...interface{}) in
 	}
 	return e.records[period]
 }
+
+
+func (e *OKCoinCn) ExchangeRate(count string,stockType string) string {
+	return ""
+}
+

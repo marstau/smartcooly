@@ -553,3 +553,8 @@ func (e *Poloniex) GetRecords(stockType, period string, sizes ...interface{}) in
 	}
 	return e.records[period]
 }
+
+func (e *Poloniex) ExchangeRate(count string,stockType string) string {
+	return ""
+}
+

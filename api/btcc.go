@@ -457,3 +457,7 @@ func (e *Btcc) GetRecords(stockType, period string, sizes ...interface{}) interf
 	e.records[period] = records
 	return e.records[period]
 }
+
+func (e *Btcc) ExchangeRate(count string,stockType string) string {
+	return ""
+}

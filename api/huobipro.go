@@ -486,3 +486,7 @@ func (e *HuobiPro) GetRecords(stockType, period string, sizes ...interface{}) in
 	}
 	return e.records[period]
 }
+
+func (e *HuobiPro) ExchangeRate(count string,stockType string) string {
+	return ""
+}

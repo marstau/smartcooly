@@ -13,6 +13,7 @@ type Option struct {
 // Exchange interface
 type Exchange interface {
 	Log(...interface{})
+	ExchangeRate(count string,stockType string) string
 	GetType() string
 	GetName() string
 	SetLimit(times interface{}) float64
