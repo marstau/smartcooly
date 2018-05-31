@@ -87,13 +87,7 @@ func (e *Bibox) GetType() string {
 
 // GetName get the name of this exchange
 func (e *Bibox) GetName() string {
-	// return e.api.Name
-	name, err := e.api.GetAccountId()
-	if err != nil {
-		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetName() error, ", err)
-		return ""
-	}
-	return name
+	return e.api.GetExchangeName()
 }
 
 // SetLimit set the limit calls amount per second of this exchange
@@ -416,7 +410,7 @@ func (e *Bibox) CancelOrder(order Order) bool {
 
 // GetTicker get market ticker & depth
 func (e *Bibox) GetTicker(stockType string, sizes ...interface{}) interface{} {
-	ticker, err := e.api.GetTicker(goex.BTC_USDT)
+	ticker, err := e.api.GetTicker(goex.NewCurrencyPair2(stockType))
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, err)
 		return false
