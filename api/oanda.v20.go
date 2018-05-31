@@ -555,3 +555,8 @@ func (e *OandaV20) GetRecords(stockType, period string, sizes ...interface{}) in
 	}
 	return e.records[period]
 }
+
+
+func (e *OandaV20) ExchangeRate(count string,stockType string) string {
+	return ""
+}

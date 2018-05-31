@@ -460,3 +460,7 @@ func (e *Chbtc) GetRecords(stockType, period string, sizes ...interface{}) inter
 	}
 	return e.records[period]
 }
+
+func (e *Chbtc) ExchangeRate(count string,stockType string) string {
+	return ""
+}

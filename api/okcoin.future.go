@@ -525,3 +525,9 @@ func (e *OKCoinFuture) GetRecords(stockType, period string, sizes ...interface{}
 	}
 	return e.records[period]
 }
+
+
+func (e *OKCoinFuture) ExchangeRate(count string,stockType string) string {
+	return ""
+}
+

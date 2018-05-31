@@ -17,7 +17,6 @@ var (
 	errHalt       = fmt.Errorf("HALT")
 	exchangeMaker = map[string]func(api.Option) api.Exchange{
 		constant.OkCoinCn:     api.NewOKCoinCn,
-		constant.Huobi:        api.NewHuobi,
 		constant.HuobiPro:     api.NewHuobiPro,
 		constant.Bibox:        api.NewBibox,
 		constant.Poloniex:     api.NewPoloniex,

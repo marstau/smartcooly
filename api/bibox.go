@@ -146,7 +146,7 @@ func (e *Bibox) GetAccount() interface{} {
 	// 	return false
 	// }
 
-	accountid, err := e.api.GetAccount()
+	account, err := e.api.GetAccount()
 	if err != nil {
 		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "GetAccount() error, ", err)
 		return nil
@@ -160,7 +160,7 @@ func (e *Bibox) GetAccount() interface{} {
 	// 	"LTC":       conver.Float64Must(json.Get("available_ltc_display").Interface()),
 	// 	"FrozenLTC": conver.Float64Must(json.Get("frozen_ltc_display").Interface()),
 	// }
-	return accountid
+	return account
 }
 
 
@@ -485,4 +485,14 @@ func (e *Bibox) GetRecords(stockType, period string, sizes ...interface{}) inter
 		e.records[period] = e.records[period][len(e.records[period])-size : len(e.records[period])]
 	}
 	return e.records[period]
+}
+
+func (e *Bibox) ExchangeRate(count string,stockType string) string {
+	ticker, err := e.api.GetTicker(goex.NewCurrencyPair2(stockType))
+	if err != nil {
+		e.logger.Log(constant.ERROR, "", 0.0, 0.0, "ExchangeRate() error, ", err)
+		return ""
+	}
+
+	return conver.StringMust(conver.Float64Must(count)/ticker.Last)
 }
