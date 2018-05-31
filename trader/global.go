@@ -19,7 +19,7 @@ type task struct {
 
 // Send email ...
 func (g *Global) SendEmail(msgs ...interface{}) {
-	g.Email.SendEmail(conver.StringMust(msgs[0]), conver.StringMust(msgs[1]))
+	g.Email.SendEmail(conver.StringMust(msgs[0]), conver.StringMust(msgs[1]), conver.StringMust(msgs[2]))
 }
 
 // Sleep ...
