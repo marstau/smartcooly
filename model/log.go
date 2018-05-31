@@ -59,7 +59,7 @@ func (l Logger) Log(method string, stockType string, price, amount float64, mess
 					}
 				}
 			}
-			message += fmt.Sprintf("%+v", m)
+			message += fmt.Sprintf("%+v ", m)
 		}
 		log := Log{
 			TraderID:     l.TraderID,
