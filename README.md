@@ -43,9 +43,14 @@ Then, smartcooly is running at `http://localhost:19876`.
 ```
 heroku addons:create heroku-postgresql:hobby-basic -a smartcooly
 heroku buildpacks:add https://github.com/debitoor/ssh-private-key-buildpack.git -a smartcooly
-heroku config:set SSH_KEY=$(cat ~/.ssh/id_rsa | base64)  -a smartcooly
 heroku buildpacks:add heroku/go -a smartcooly
+heroku config:set SSH_KEY=$(cat ~/.ssh/id_rsa | base64)  -a smartcooly
+heroku config:set MAIL_SMTP=smtp.mxhichina.com  -a smartcooly
+heroku config:set MAIL_SMTP_PORT=465  -a smartcooly
+heroku config:set MAIL_SENDER_ADDRESS=email_from_address  -a smartcooly
+heroku config:set MAIL_PASSWORD=email_from_password  -a smartcooly
 ```
+
 ## Usage
 
 ### Add an Exchange
