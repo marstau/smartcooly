@@ -36,7 +36,7 @@ func init() {
 	}
 }
 
-func sendPlain(user, password, host, to, title, subject, body, mailtype string) error {
+func sendPlain(user, password, host, to, title, body, mailtype string) error {
 	hp := strings.Split(host, ":")
 	auth := smtp.PlainAuth("", user, password, hp[0])
 	var content_type string
@@ -85,22 +85,28 @@ func dial(addr string) (*tls.Conn, error) {
 }
 
 // compose message according to "from, to, subject, body"
-func composeMsg(from string, to string, subject string, body string) (message string) {
+func composeMsg(from, to, subject, body, mailtype string) (message string) {
     // Setup headers
     headers := make(map[string]string)
     headers["From"] = from
     headers["To"] = to
     headers["Subject"] = subject
+	if mailtype == "html" {
+		headers["Content-Type"] = "text/" + mailtype + "; charset=UTF-8"
+	} else {
+		headers["Content-Type"] = "text/plain" + "; charset=UTF-8"
+	}
     // Setup message
     for k, v := range headers {
         message += fmt.Sprintf("%s: %s\r\n", k, v)
     }
     message += "\r\n" + body
+
     return
 }
 
 // send email over SSL
-func sendSSL(to string, title string, subject string, body string) (err error) {
+func sendSSL(user, password, host, to, subject, body, mailtype string) (err error) {
     localhost, _, _ := net.SplitHostPort(host)
     // get SSL connection
     conn, err := dial(host)
@@ -135,10 +141,10 @@ func sendSSL(to string, title string, subject string, body string) (err error) {
     if err != nil {
         return
     }
-    // compose message body
-    message := composeMsg(from.String(), localto.String(), subject, body)
+
+	msg := composeMsg(from.String(), localto.String(), subject, body, "html")
     // write message to recp
-    _, err = writer.Write([]byte(message))
+    _, err = writer.Write([]byte(msg))
     if err != nil {
         return
     }
@@ -215,12 +221,12 @@ func (e Email) SendEmail(to string, title string, bodyTitle string) {
 	}
 
 	// Generate the plaintext version of the e-mail (for clients that do not support xHTML)
-	emailText, err := h.GeneratePlainText(email)
-	if err != nil {
-	    panic(err) // Tip: Handle error with something else than a panic ;)
-	}
+	// emailText, err := h.GeneratePlainText(email)
+	// if err != nil {
+	//     panic(err) // Tip: Handle error with something else than a panic ;)
+	// }
 
-	err = sendSSL(to, title, emailText, emailBody)
+	err = sendSSL(user, password, host, to, title, emailBody, "html")
 	if err != nil {
 		fmt.Println("Send mail error!")
 		fmt.Println(err)
