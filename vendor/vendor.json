@@ -144,211 +144,184 @@
 			"revisionTime": "2018-03-27T07:18:24Z"
 		},
 		{
-			"checksumSHA1": "sLzlYQITYNHRzP1WT/e3Y/3KfJo=",
+			"checksumSHA1": "Tzz5ivYxL6APkKsi1sAN+xQBV2w=",
 			"path": "github.com/marstau/GoEx",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "atRR/1jXeUEEgan9wNeo7kaEmdQ=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/acx",
 			"path": "github.com/marstau/GoEx/acx",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "4EsgzRmEJbe3pdH4kngWwAoe+ec=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/aex",
 			"path": "github.com/marstau/GoEx/aex",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
-			"checksumSHA1": "WhRj90yVSTEughVQ0HqsgF3/qj0=",
+			"checksumSHA1": "TKCc2pbeJI/MFq1278Lsb8FsAYo=",
 			"path": "github.com/marstau/GoEx/bibox",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "hEVCbh/dJ09WuLv9IINKryusw38=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/bigone",
 			"path": "github.com/marstau/GoEx/bigone",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "bJH/G1dLOIIpxlhFUJumfnanwSg=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/binance",
 			"path": "github.com/marstau/GoEx/binance",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "BuRmG6pexF4+mV4V9R04IRAd7/Y=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/bitfinex",
 			"path": "github.com/marstau/GoEx/bitfinex",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "GpIaBh1xD6FuWcXaLojrhOdNav4=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/bithumb",
 			"path": "github.com/marstau/GoEx/bithumb",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "NXU8LTucoNlHwScwC5b28cImdtQ=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/bitstamp",
 			"path": "github.com/marstau/GoEx/bitstamp",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "Bk5yQwAZd+51v/yWsTiKnwLzSHg=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/bittrex",
 			"path": "github.com/marstau/GoEx/bittrex",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "9k77bj9vD9oRyaUPsnz+NHbKGMw=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/btcbox",
 			"path": "github.com/marstau/GoEx/btcbox",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "yomBML3HW4Hkc7wTIBU0qXOvC9s=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/btcc",
 			"path": "github.com/marstau/GoEx/btcc",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "rerti9qXYwPLEB2rxnqt/qTFrMc=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/btcmarkets",
 			"path": "github.com/marstau/GoEx/btcmarkets",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "hArbXqhlLtMN2yao0zs8hW2lDe0=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/builder",
 			"path": "github.com/marstau/GoEx/builder",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "lM9ta7YRrAVgBlTmKI6DSVa2eEw=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/c-cex",
 			"path": "github.com/marstau/GoEx/c-cex",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "RXDD7K6Bb6qyaQobZWjXIYwX210=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/coincheck",
 			"path": "github.com/marstau/GoEx/coincheck",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "X1jWbC/bxUqfwaI5U8ckC1WSum8=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/coineal",
 			"path": "github.com/marstau/GoEx/coineal",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "+p+ojr1tVX5WgZpxFQna1Ns9HHA=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/coinex",
 			"path": "github.com/marstau/GoEx/coinex",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "z22Iu7k69/Ck7pZuSSfyNAe+ajM=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/cryptopia",
 			"path": "github.com/marstau/GoEx/cryptopia",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "05pOqJ4m/ZnvxJ728wdkKgFgIMY=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/gateio",
 			"path": "github.com/marstau/GoEx/gateio",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "kE1cL/dUX9wK7PQsftLj4ofUQY8=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/gdax",
 			"path": "github.com/marstau/GoEx/gdax",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "YFrmjpM+y+pHhCXvJXgsNNlCauY=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/hitbtc",
 			"path": "github.com/marstau/GoEx/hitbtc",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "OlacVkR29buPIIJe7W2dYHhWr+8=",
 			"path": "github.com/marstau/GoEx/huobi",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "T4Zvtg2l+yeHVX+RgxPQnELBmaI=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/kraken",
 			"path": "github.com/marstau/GoEx/kraken",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "w20EgK6rOfkOLtRWBOadOnnNui4=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/liqui",
 			"path": "github.com/marstau/GoEx/liqui",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "/JeWsxllKF1Ntu54s8PkiFFXZGU=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/okcoin",
 			"path": "github.com/marstau/GoEx/okcoin",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "bKsxjjalDopl/iYCpq37f3aoBXA=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/poloniex",
 			"path": "github.com/marstau/GoEx/poloniex",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "rpMPpUm3acdtdBKWXbKCExPk+g8=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/wex",
 			"path": "github.com/marstau/GoEx/wex",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "2YDAM87J8foFgJIr0VIDK1vRoi8=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/zaif",
 			"path": "github.com/marstau/GoEx/zaif",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "ib7yVRRDblu+zCWi9lUrFmlnL1E=",
-			"origin": "github.com/marstau/smartcooly/vendor/github.com/marstau/GoEx/zb",
 			"path": "github.com/marstau/GoEx/zb",
-			"revision": "9389eae673c2ef199d924764b4c877d1a7717805",
-			"revisionTime": "2018-05-24T09:24:36Z"
+			"revision": "88e35f594bf19651dcbd40db1897060d4d779b26",
+			"revisionTime": "2018-06-11T07:56:52Z"
 		},
 		{
 			"checksumSHA1": "uFOueXf/+510zgUs9j4P0qAV9Ss=",
