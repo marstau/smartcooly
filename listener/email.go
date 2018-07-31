@@ -30,7 +30,7 @@ func init() {
 
 	envSMTP := os.Getenv("MAIL_SMTP")
 	if envSMTP != "" {
-		host = envSMTP + ":" + os.Getenv("MAIL_SMTP_PORT")
+		host = envSMTP + os.Getenv("MAIL_SMTP_PORT")
 		user = os.Getenv("MAIL_SENDER_ADDRESS")
 		password = os.Getenv("MAIL_PASSWORD")
 	}
